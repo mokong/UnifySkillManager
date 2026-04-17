@@ -1,0 +1,12 @@
+{
+  "name": "unify-skill-manager",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Local Web UI for managing Skill and Rule Markdown files across AI coding tools.",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

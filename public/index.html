@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>UnifySkillManager</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Local Skill / Rule Manager</p>
+        <h1>UnifySkillManager</h1>
+      </div>
+      <button id="refreshBtn" class="button primary">刷新状态</button>
+    </header>
+
+    <main>
+      <section class="band intro">
+        <div class="introText">
+          <h2>统一管理 Markdown Skill 和 Rule</h2>
+          <p>直接添加已有 MD 文件，解析成统一模型，再同步到 Codex、Claude、Cursor、CodeBuddy 的全局或当前项目配置。</p>
+        </div>
+        <div class="stats" id="stats"></div>
+      </section>
+
+      <section class="band">
+        <div class="sectionHead">
+          <div>
+            <p class="eyebrow">Step 1</p>
+            <h2>添加 Markdown</h2>
+          </div>
+          <p>主流程是添加 `.md` 文件；粘贴和新建也会保存为 Markdown。</p>
+        </div>
+
+        <div class="importGrid">
+          <div class="panel">
+            <h3>添加 MD 文件</h3>
+            <p>选择本地 `.md` 文件，系统会复制到 `library/skills` 或 `library/rules`。</p>
+            <div class="row">
+              <label>类型
+                <select id="fileType">
+                  <option value="skill">Skill</option>
+                  <option value="rule">Rule</option>
+                </select>
+              </label>
+              <input id="fileInput" type="file" accept=".md,text/markdown,text/plain">
+            </div>
+          </div>
+
+          <div class="panel">
+            <h3>自动扫描电脑上的 Skill / Rule</h3>
+            <p>扫描 Codex、Claude、Cursor、CodeBuddy 的常见目录，去重后导入当前 Library。</p>
+            <div class="row">
+              <button id="scanExistingBtn" class="button">扫描预览</button>
+              <button id="importExistingBtn" class="button primary">去重导入</button>
+            </div>
+            <div id="scanResult" class="scanResult"></div>
+          </div>
+
+          <div class="panel">
+            <h3>粘贴 / 新建 Markdown</h3>
+            <p>支持带 YAML frontmatter 的完整 Markdown，也支持只有标题和正文。</p>
+            <div class="row">
+              <label>类型
+                <select id="pasteType">
+                  <option value="skill">Skill</option>
+                  <option value="rule">Rule</option>
+                </select>
+              </label>
+              <button id="loadTemplateBtn" class="button">填入模板</button>
+            </div>
+            <textarea id="markdownInput" spellcheck="false" placeholder="# My Skill&#10;&#10;Write instructions here."></textarea>
+            <button id="saveMarkdownBtn" class="button primary">保存 Markdown</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="band">
+        <div class="sectionHead">
+          <div>
+            <p class="eyebrow">Step 2</p>
+            <h2>工具检测</h2>
+          </div>
+          <label class="projectRoot">当前项目
+            <input id="projectRootInput" type="text">
+          </label>
+        </div>
+        <div id="toolGrid" class="toolGrid"></div>
+      </section>
+
+      <section class="band">
+        <div class="sectionHead">
+          <div>
+            <p class="eyebrow">Step 3</p>
+            <h2>Skill / Rule Library</h2>
+          </div>
+          <div class="filters">
+            <button class="tab active" data-filter="all">全部</button>
+            <button class="tab" data-filter="skill">Skill</button>
+            <button class="tab" data-filter="rule">Rule</button>
+          </div>
+        </div>
+        <div class="libraryLayout">
+          <div id="entryList" class="entryList"></div>
+          <article id="entryDetail" class="detail empty">
+            <h3>选择一个 Skill 或 Rule</h3>
+            <p>可以查看 Markdown 原文、修改内容、预览目标工具输出并同步。</p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <div id="toast" class="toast" hidden></div>
+    <script src="/app.js"></script>
+  </body>
+</html>
