@@ -125,9 +125,50 @@ main {
   margin-bottom: 14px;
 }
 
+.actionBar {
+  display: flex;
+  align-items: end;
+  gap: 10px;
+  flex-wrap: wrap;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  padding: 12px;
+}
+
+.compactSelect {
+  min-width: 120px;
+}
+
+.fileButton {
+  position: relative;
+  overflow: hidden;
+}
+
+.fileButton input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.composerPanel {
+  margin-top: 14px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  padding: 18px;
+}
+
+.sectionHead.compact {
+  align-items: start;
+}
+
+.sectionHead.compact p {
+  margin-bottom: 0;
+}
+
 .importGrid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(260px, 1fr));
+  grid-template-columns: repeat(2, minmax(260px, 1fr));
   gap: 18px;
 }
 
@@ -259,6 +300,10 @@ textarea {
   display: grid;
   gap: 10px;
   align-content: start;
+  max-height: 640px;
+  overflow-y: auto;
+  padding-right: 6px;
+  scrollbar-gutter: stable;
 }
 
 .entryItem {

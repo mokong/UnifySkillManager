@@ -28,39 +28,35 @@
         <div class="sectionHead">
           <div>
             <p class="eyebrow">Step 1</p>
-            <h2>添加 Markdown</h2>
+            <h2>添加和扫描</h2>
           </div>
-          <p>主流程是添加 `.md` 文件；粘贴和新建也会保存为 Markdown。</p>
+          <p>优先直接添加 `.md` 文件，也可以扫描已有工具目录。</p>
         </div>
 
-        <div class="importGrid">
-          <div class="panel">
-            <h3>添加 MD 文件</h3>
-            <p>选择本地 `.md` 文件，系统会复制到 `library/skills` 或 `library/rules`。</p>
-            <div class="row">
-              <label>类型
-                <select id="fileType">
-                  <option value="skill">Skill</option>
-                  <option value="rule">Rule</option>
-                </select>
-              </label>
-              <input id="fileInput" type="file" accept=".md,text/markdown,text/plain">
-            </div>
-          </div>
+        <div class="actionBar">
+          <label class="compactSelect">类型
+            <select id="fileType">
+              <option value="skill">Skill</option>
+              <option value="rule">Rule</option>
+            </select>
+          </label>
+          <label class="button fileButton">
+            添加 MD 文件
+            <input id="fileInput" type="file" accept=".md,text/markdown,text/plain">
+          </label>
+          <button id="scanExistingBtn" class="button">扫描预览</button>
+          <button id="importExistingBtn" class="button primary">去重导入</button>
+          <button id="toggleComposerBtn" class="button">粘贴 / 新建</button>
+        </div>
 
-          <div class="panel">
-            <h3>自动扫描电脑上的 Skill / Rule</h3>
-            <p>扫描 Codex、Claude、Cursor、CodeBuddy 的常见目录，去重后导入当前 Library。</p>
-            <div class="row">
-              <button id="scanExistingBtn" class="button">扫描预览</button>
-              <button id="importExistingBtn" class="button primary">去重导入</button>
-            </div>
-            <div id="scanResult" class="scanResult"></div>
-          </div>
+        <div id="scanResult" class="scanResult"></div>
 
-          <div class="panel">
-            <h3>粘贴 / 新建 Markdown</h3>
-            <p>支持带 YAML frontmatter 的完整 Markdown，也支持只有标题和正文。</p>
+        <div id="composerPanel" class="composerPanel" hidden>
+          <div class="sectionHead compact">
+            <div>
+              <h3>粘贴 / 新建 Markdown</h3>
+              <p>支持带 YAML frontmatter 的完整 Markdown，也支持只有标题和正文。</p>
+            </div>
             <div class="row">
               <label>类型
                 <select id="pasteType">
@@ -70,9 +66,9 @@
               </label>
               <button id="loadTemplateBtn" class="button">填入模板</button>
             </div>
-            <textarea id="markdownInput" spellcheck="false" placeholder="# My Skill&#10;&#10;Write instructions here."></textarea>
-            <button id="saveMarkdownBtn" class="button primary">保存 Markdown</button>
           </div>
+          <textarea id="markdownInput" spellcheck="false" placeholder="# My Skill&#10;&#10;Write instructions here."></textarea>
+          <button id="saveMarkdownBtn" class="button primary">保存 Markdown</button>
         </div>
       </section>
 

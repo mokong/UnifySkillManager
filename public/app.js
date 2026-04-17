@@ -14,6 +14,8 @@ const els = {
   scanExistingBtn: document.querySelector("#scanExistingBtn"),
   importExistingBtn: document.querySelector("#importExistingBtn"),
   scanResult: document.querySelector("#scanResult"),
+  toggleComposerBtn: document.querySelector("#toggleComposerBtn"),
+  composerPanel: document.querySelector("#composerPanel"),
   pasteType: document.querySelector("#pasteType"),
   markdownInput: document.querySelector("#markdownInput"),
   saveMarkdownBtn: document.querySelector("#saveMarkdownBtn"),
@@ -32,6 +34,7 @@ function init() {
   els.fileInput.addEventListener("change", importFile);
   els.scanExistingBtn.addEventListener("click", scanExisting);
   els.importExistingBtn.addEventListener("click", importExisting);
+  els.toggleComposerBtn.addEventListener("click", toggleComposer);
   els.saveMarkdownBtn.addEventListener("click", savePastedMarkdown);
   els.loadTemplateBtn.addEventListener("click", loadTemplate);
   els.projectRootInput.addEventListener("change", refresh);
@@ -320,6 +323,11 @@ function loadTemplate() {
   const id = type === "skill" ? "my-new-skill" : "my-new-rule";
   const title = type === "skill" ? "My New Skill" : "My New Rule";
   els.markdownInput.value = `---\nid: ${id}\ntype: ${type}\nname: ${title}\ndescription: Describe when to use this ${type}.\ntags:\n  - workflow\ntargets:\n  - codex\n  - claude\n  - cursor\n  - codebuddy\nscope:\n  - project\nenabled: true\nversion: 1.0.0\n---\n\n# ${title}\n\nWrite the ${type} instructions here.\n`;
+}
+
+function toggleComposer() {
+  els.composerPanel.hidden = !els.composerPanel.hidden;
+  els.toggleComposerBtn.textContent = els.composerPanel.hidden ? "粘贴 / 新建" : "收起编辑器";
 }
 
 async function api(url, options = {}) {
